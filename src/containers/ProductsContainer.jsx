@@ -1,37 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { addToCart } from '../actions';
 import { getVisibleProducts } from '../reducers/products';
 import ProductItem from '../components/ProductItem';
 import ProductsList from '../components/ProductsList';
+import { useSelector, useDispatch } from 'react-redux';
 
-const ProductsContainer = ({ products, addToCart }) => (
-  <ProductsList title="Products">
-    {products.map((product) => (
-      <ProductItem
-        key={product.id}
-        product={product}
-        onAddToCartClicked={() => addToCart(product.id)}
-      />
-    ))}
-  </ProductsList>
-);
-
-ProductsContainer.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      inventory: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
-  addToCart: PropTypes.func.isRequired,
+const ProductsContainer = () => {
+  const products = useSelector((state) => getVisibleProducts(state.products));
+  const dispatch = useDispatch();
+  return (
+    <ProductsList title="Products">
+      {products.map((product) => (
+        <ProductItem
+          key={product.id}
+          product={product}
+          onAddToCartClicked={() => dispatch(addToCart(product.id))}
+        />
+      ))}
+    </ProductsList>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  products: getVisibleProducts(state.products),
-});
-
-export default connect(mapStateToProps, { addToCart })(ProductsContainer);
+export default ProductsContainer;
