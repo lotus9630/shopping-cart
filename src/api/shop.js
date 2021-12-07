@@ -1,6 +1,6 @@
 import _product from './products.json';
 
-const TIMEOUT = 100;
+const TIMEOUT = 1000;
 
 const shop = {
   getProducts: (cb, timeout) =>

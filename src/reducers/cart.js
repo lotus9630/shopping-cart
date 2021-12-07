@@ -12,6 +12,7 @@ const initialState = {
 const addedIds = (state = initialState.addedIds, action) => {
   switch (action.type) {
     case ADD_TO_CART:
+      // 해당 productId의 상품이 이미 있는 경우
       if (state.indexOf(action.productId) !== -1) {
         return state;
       }

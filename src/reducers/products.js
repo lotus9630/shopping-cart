@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
 import { RECEIVE_PRODUCTS, ADD_TO_CART } from '../constants/ActionTypes';
 
-const products = (state, action) => {
+// Private function
+const getProducts = (state, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       return {
@@ -13,7 +13,7 @@ const products = (state, action) => {
   }
 };
 
-const byId = (state = {}, action) => {
+const products = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_PRODUCTS:
       return {
@@ -28,28 +28,16 @@ const byId = (state = {}, action) => {
       if (productId) {
         return {
           ...state,
-          [productId]: products(state[productId], action),
+          [productId]: getProducts(state[productId], action),
         };
       }
       return state;
   }
 };
 
-const visibleIds = (state = [], action) => {
-  switch (action.type) {
-    case RECEIVE_PRODUCTS:
-      return action.products.map((product) => product.id);
-    default:
-      return state;
-  }
-};
+export default products;
 
-export default combineReducers({
-  byId,
-  visibleIds,
-});
+// export const getProduct = (state, id) => state.byId[id];
 
-export const getProduct = (state, id) => state.byId[id];
-
-export const getVisibleProducts = (state) =>
-  state.visibleIds.map((id) => getProduct(state, id));
+// export const getVisibleProducts = (state) =>
+//   state.visibleIds.map((id) => getProduct(state, id));

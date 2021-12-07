@@ -5,8 +5,8 @@ import Cart from '../components/Cart';
 import { useSelector, useDispatch } from 'react-redux';
 
 const CartContainer = () => {
-  const products = useSelector((state) => getCartProducts(state));
-  const total = useSelector((state) => getTotal(state));
+  const products = {}; // = useSelector((state) => getCartProducts(state));
+  const total = 0; // = useSelector((state) => getTotal(state));
   const dispatch = useDispatch();
   return (
     <Cart

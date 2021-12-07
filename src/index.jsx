@@ -6,7 +6,6 @@ import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import reducer from './reducers';
-import { getAllProducts } from './actions';
 import App from './containers/App';
 
 const middleware = [thunk];
@@ -18,8 +17,6 @@ const store = createStore(
   reducer,
   composeWithDevTools(applyMiddleware(...middleware)),
 );
-
-store.dispatch(getAllProducts());
 
 render(
   <Provider store={store}>
