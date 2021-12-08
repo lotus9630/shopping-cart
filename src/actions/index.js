@@ -18,7 +18,7 @@ const addToCartUnsafe = (productId) => ({
 });
 
 export const addToCart = (productId) => (dispatch, getState) => {
-  if (getState().products.byId[productId].inventory > 0) {
+  if (getState().products[productId].inventory > 0) {
     dispatch(addToCartUnsafe(productId));
   }
 };

@@ -2,11 +2,11 @@ import React from 'react';
 import { addToCart } from '../actions';
 import ProductItem from '../components/ProductItem';
 import ProductsList from '../components/ProductsList';
-import { useSelector, useDispatch } from 'react-redux';
-import _product from 'api/products.json';
+import { useDispatch } from 'react-redux';
+import { useGetProductsArray } from 'hooks';
 
 const ProductsContainer = () => {
-  const products = _product;
+  const products = useGetProductsArray();
   const dispatch = useDispatch();
   return (
     <ProductsList title="Products">
